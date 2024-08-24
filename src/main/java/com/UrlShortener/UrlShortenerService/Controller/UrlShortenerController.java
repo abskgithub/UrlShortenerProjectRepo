@@ -1,11 +1,14 @@
-package com.UrlShortener.UrlShortenerService;
+package com.UrlShortener.UrlShortenerService.Controller;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.UrlShortener.UrlShortenerService.Service.UrlShortenerService;
+
 @RestController
+@RequestMapping("/api")
 public class UrlShortenerController {
 
     private final UrlShortenerService urlShortenerService;

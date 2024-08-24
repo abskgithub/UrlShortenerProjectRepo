@@ -1,4 +1,4 @@
-package com.UrlShortener.UrlShortenerService;
+package com.UrlShortener.UrlShortenerService.Util;
 
 import java.util.Random;
 

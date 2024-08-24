@@ -1,6 +1,11 @@
-package com.UrlShortener.UrlShortenerService;
+package com.UrlShortener.UrlShortenerService.Service;
 
 import org.springframework.stereotype.Service;
+
+import com.UrlShortener.UrlShortenerService.Model.UrlMapping;
+import com.UrlShortener.UrlShortenerService.Repository.UrlRepository;
+import com.UrlShortener.UrlShortenerService.Util.UrlShortenerUtil;
+
 import java.util.stream.Collectors;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

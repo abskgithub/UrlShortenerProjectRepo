@@ -1,4 +1,4 @@
-package com.UrlShortener.UrlShortenerService;
+package com.UrlShortener.UrlShortenerService.Model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
