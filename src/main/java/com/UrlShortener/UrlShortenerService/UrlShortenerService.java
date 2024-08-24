@@ -3,6 +3,7 @@ package com.UrlShortener.UrlShortenerService;
 import org.springframework.stereotype.Service;
 import java.util.stream.Collectors;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class UrlShortenerService {
@@ -34,7 +35,15 @@ public class UrlShortenerService {
                 .stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .limit(3)
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (x, y) -> y, LinkedHashMap::new));
+    }
+
+    public String getOriginalUrl(String shortUrl) {
+        UrlMapping urlMapping = urlRepository.findByShortUrl(shortUrl);
+        if (urlMapping != null) {
+            return urlMapping.getOriginalUrl();
+        }
+        throw new NoSuchElementException("Short URL not found");
     }
 
 }
