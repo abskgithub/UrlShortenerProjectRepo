@@ -1,8 +1,11 @@
 package com.UrlShortener.UrlShortenerService;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
+@Entity
 public class UrlMapping {
-
+    @Id
     private String shortUrl;
     private String originalUrl;
 

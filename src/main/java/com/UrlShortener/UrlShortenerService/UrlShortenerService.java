@@ -1,11 +1,14 @@
 package com.UrlShortener.UrlShortenerService;
 
 import org.springframework.stereotype.Service;
+import java.util.stream.Collectors;
+import java.util.*;
 
 @Service
 public class UrlShortenerService {
     
     private final UrlRepository urlRepository;
+    private final Map<String, Integer> domainCounter = new ConcurrentHashMap<>();
 
     public UrlShortenerService(UrlRepository urlRepository) {
         this.urlRepository = urlRepository;
@@ -20,7 +23,18 @@ public class UrlShortenerService {
         String shortUrl = UrlShortenerUtil.generateShortUrl(originalUrl);
         urlRepository.save(new UrlMapping(originalUrl, shortUrl));
 
+        String domain = UrlShortenerUtil.extractDomain(originalUrl);
+        domainCounter.put(domain, domainCounter.getOrDefault(domain, 0) + 1);
+
         return shortUrl;
+    }
+
+    public Map<String, Integer> getTopDomains() {
+        return domainCounter.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .limit(3)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
 }

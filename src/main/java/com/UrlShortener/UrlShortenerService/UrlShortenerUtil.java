@@ -14,4 +14,11 @@ public class UrlShortenerUtil {
         }
         return shortUrl.toString();
     }
+
+    public static String extractDomain(String url) {
+        String domain = url.split("/")[2];
+        String web = domain.startsWith("www.") ? domain.substring(4) : domain;
+        return web.split("\\.")[0];
+    }
+    
 }
